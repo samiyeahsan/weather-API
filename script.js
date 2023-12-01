@@ -1,3 +1,5 @@
+var history = localStorage.getItem("weatherHistory") || []
+
 function getLatandLon(cityName) {
   console.log("Hey");
   fetch("https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=ed30da8b7e6b64e1e30ec66b1dc30a37&units=imperial")
@@ -15,6 +17,7 @@ function getLatandLon(cityName) {
       document.getElementById ("temp").textContent="Tempture: "+data.main.temp
       document.getElementById ("wind").textContent="Wind: "+data.wind.speed
       document.getElementById ("humidity").textContent="Humidity: "+data.main.humidity
+      storeSearch(cityName)
     });
 }
 
@@ -48,6 +51,18 @@ async function getForecast(lat, lon){
   }
   
  
+}
+function storeSearch (city){
+  history.push(city)
+  localStorage.setItem("weatherHistory", history)
+}
+function loadSearches (){
+  for(var i = 0; i<history.length; i++){
+    if (history[i].dt_txt.includes(cityName)){
+      let card = document.createElement("button")
+
+  }
+}
 }
 
 
