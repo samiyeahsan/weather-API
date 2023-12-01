@@ -18,10 +18,14 @@ function getLatandLon(cityName) {
     });
 }
 
+
+
+
 async function getForecast(lat, lon){
   const resp = await fetch("https://api.openweathermap.org/data/2.5/forecast?lat=" + lat + "&lon=" + lon + "&appid=ed30da8b7e6b64e1e30ec66b1dc30a37&units=imperial")
   const data = await resp.json();
   console.log(data)
+  document.getElementById("boxes").innerHTML = ""
   for (var i = 0; i<data.list.length; i++){
     if (data.list[i].dt_txt.includes("12:00:00")){
       let card = document.createElement("div")
@@ -46,9 +50,11 @@ async function getForecast(lat, lon){
  
 }
 
+
 document.getElementById("searchbtn").addEventListener("click", function (event) {
   event.preventDefault()
   var city = document.getElementById('searchInput').value
   console.log(city);
   getLatandLon(city)
 });
+
